@@ -22,8 +22,8 @@ public class FineController {
     }
 
     @PostMapping("/issue")
-    public String issueFine(@ModelAttribute Fine fine) {
-        fineService.issueFine(fine.getPassengerName(), fine.getViolation(), fine.getAmount());
+    public String issueFine(@ModelAttribute Fine fine, @RequestParam("email") String email) {
+        fineService.issueFine(fine.getPassengerName(), email, fine.getViolation(), fine.getAmount());
         return "redirect:/fines/list";
     }
 
