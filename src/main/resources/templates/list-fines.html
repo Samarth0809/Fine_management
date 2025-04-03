@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Fines</title>
+</head>
+<body>
+    <h2>List of Issued Fines</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Passenger Name</th>
+                <th>Violation</th>
+                <th>Amount</th>
+                <th>Issue Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="fine : ${fines}">
+                <td th:text="${fine.passengerName}"></td>
+                <td th:text="${fine.violation}"></td>
+                <td th:text="${fine.amount}"></td>
+                <td th:text="${fine.issueDate}"></td>
+                <td th:text="${fine.status}"></td>
+                <td>
+                    <form th:action="@{/fines/pay/{id}(id=${fine.id})}" method="post">
+                        <button type="submit">Pay Fine</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
