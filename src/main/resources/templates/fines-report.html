@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fines Report</title>
+</head>
+<body>
+    <h2>Fines Report</h2>
+    <form th:action="@{/reports/fines}" method="get">
+        <div>
+            <label>Start Date:</label>
+            <input type="date" name="startDate" required />
+        </div>
+        <div>
+            <label>End Date:</label>
+            <input type="date" name="endDate" required />
+        </div>
+        <div>
+            <button type="submit">Generate Report</button>
+        </div>
+    </form>
+    <h3>Report Results</h3>
+    <div th:if="${fines != null}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Passenger Name</th>
+                    <th>Violation</th>
+                    <th>Amount</th>
+                    <th>Issue Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fine : ${fines}">
+                    <td th:text="${fine.passengerName}"></td>
+                    <td th:text="${fine.violation}"></td>
+                    <td th:text="${fine.amount}"></td>
+                    <td th:text="${fine.issueDate}"></td>
+                    <td th:text="${fine.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Total Amount: <span th:text="${totalAmount}"></span></h4>
+    </div>
+</body>
+</html>
